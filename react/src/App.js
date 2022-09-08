@@ -13,10 +13,10 @@ function App() {
       
     <div className='mars-weather'>
       <div className='date'>
-        <h2 className='section-title'>Sol
+        <h2 className='section-title section-title-date'>Sol
             <span data-current-sol> 375</span>
         </h2>
-        <p className='date__day' data-current-date>September 31</p>
+        <p className='date-day'>September 31</p>
       </div>
 
       <div className='temp'>
@@ -27,7 +27,7 @@ function App() {
 
       <div className='pressure'>
         <h2 className='section-title'>Pressure</h2>
-        <p className='reading'>836 Pa</p>
+        <p className='reading'>836 Pa -  <span data-pressure> [Higher] </span></p>
       </div>
 
       <div className='info'>
@@ -35,8 +35,8 @@ function App() {
            surface of Mars at Gale Crater.
         </p> 
         <p>This is only a partial part of Curiosty's mission. 
-            <a href='https://mars.nasa.gov/msl/home/'>Click here</a>
-            to find out more.
+            <a href='https://mars.nasa.gov/msl/home/'> Click here </a>
+              to find out more.
         </p>
       </div>
     </div>

@@ -10,8 +10,9 @@
   --fw-bold: 700;
   --fs-h1: 1.25rem;
   --fs-h2: 1.75rem;
+  --fs-h3: 2rem;
   --fs-body: 1rem;
-  --fs-xl: 10rem;
+  --fs-xl: 3rem;
   --clr-light: #fff;
   --clr-gray: #989898;
   --clr-dark: #444;
@@ -20,6 +21,7 @@
 }
 
 body {
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     line-height: 1.6;           /* ? */
     background-image: url(lubo-minar.png);
@@ -40,8 +42,7 @@ body {
 }
 
 .title-mars{
-    font-family: 'Montserrat', sans-serif;
-    font-size: var(--fs-xl);
+    font-size: 10rem;
     font-weight: var(--fw-normal);
     letter-spacing: 2px;
     left: 50.5%;
@@ -52,7 +53,6 @@ body {
 }
 
 .sub-title {
-    font-family: 'Montserrat', sans-serif;
     font-size: var(--fs-h2);
     font-weight: var(--fw-light);
     left: 50.5%;
@@ -63,13 +63,69 @@ body {
 }
 
 .mars-weather {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 1em;
-    max-width: 400px;
-    margin: 0 20em 20em 0;
-
-    
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2em;
+    min-width: 300px;
+    min-height: 1000px;
+    display: grid;
+    margin-left: 118em;    /* Probably not ideal */
+    margin-right: 2em;
+    margin-top: 0;
+    margin-bottom: 0;
+    grid-template-rows: (1, 6fr);
+    grid-gap: 2em;
 }
+
+a {
+    color: var(--clr-accent);
+}
+
+a:hover {
+    color: var(--clr-accent-dark);
+}
+
+.section-title {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-normal);
+    margin: 0;
+}
+
+.date {
+    grid-row: 1/2;
+}
+
+.section-title-date {
+    font-size: var(--fs-xl);
+}
+
+.date-day {
+    font-size: var(--fs-h3);
+    margin: 0;
+    margin-left: 2em;
+    color: var(--clr-accent-dark);
+}
+
+.temp {
+    grid-row: 2/3;
+    padding: 2em 0;
+}
+
+.reading {
+    color: var(--clr-accent-dark);
+    margin: 0;
+    margin-left: 2em;
+    font-size: var(--fs-h2);
+}
+
+.pressure {
+    grid-row: 3/4;
+}
+
+.info {
+    grid-row: 4/5;
+    font-size: var(--fs-h1);
+}
+
 
 
 
