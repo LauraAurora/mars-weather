@@ -7,13 +7,13 @@ require go.mongodb.org/mongo-driver v1.10.2
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.39.0 // indirect
+	github.com/valyala/fasthttp v1.40.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	golang.org/x/sys v0.0.0-20220227234510-4e6760a101f9 // indirect
+	golang.org/x/sys v0.0.0-20220908164124-27713097b956 // indirect
 )
 
 require (
-	github.com/gofiber/fiber/v2 v2.37.0
+	github.com/gofiber/fiber/v2 v2.37.1
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
 	github.com/montanaflynn/stats v0.6.6 // indirect

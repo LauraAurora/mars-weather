@@ -1,10 +1,11 @@
 package nasa_api
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"encoding/json"
+	"regexp"
 	"time"
 )
 
@@ -53,11 +54,14 @@ func GetData() Soles {
 		return result
 	}
 	
-	parse := string(body)
-	substring := parse[12827:13187]
+	parsed := string(body)
+	substring := parsed[12820:13195]
+	r := regexp.MustCompile(`\{[^}]*\}`)
+	matches := r.FindAllStringSubmatch(substring, -1)
+	substring = matches[0][0]
 
 	json.Unmarshal([]byte(substring), &result)
 	result.Terrestrial_date = currentTime.Format("01-02-2006")
-	fmt.Println(result)
+	//fmt.Println(result)
 	return result
 }

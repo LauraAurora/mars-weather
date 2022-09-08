@@ -1,11 +1,11 @@
 package main
 
 import (
-	api "MarsWeatherApp/api"
+	"MarsWeatherApp/nasa_api"
 	"fmt"
 )
 
 func main() {
-	api.StartAPI()
-	fmt.Print("test")
+	data := nasa_api.GetData()
+	fmt.Print(data)
 }
