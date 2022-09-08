@@ -1,0 +1,76 @@
+*, **::before, 
+    *::after {
+    box-sizing: border-box;
+}
+
+:root {
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-semi: 500;
+  --fw-bold: 700;
+  --fs-h1: 1.25rem;
+  --fs-h2: 1.75rem;
+  --fs-body: 1rem;
+  --fs-xl: 10rem;
+  --clr-light: #fff;
+  --clr-gray: #989898;
+  --clr-dark: #444;
+  --clr-accent: #D06D6D;
+  --clr-accent-dark: #613131; 
+}
+
+body {
+    margin: 0;
+    line-height: 1.6;           /* ? */
+    background-image: url(lubo-minar.png);
+    background-position: center;
+    background-size: cover;
+    color: var(--clr-light);    /* Sets the font to white */
+    height: 100vh;              /* ? */
+}
+
+.App-logo {
+    align-items: center;
+    justify-content: center;
+    left: 35%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 20%;
+}
+
+.title-mars{
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-normal);
+    letter-spacing: 2px;
+    left: 50.5%;
+    margin: 0;
+    position: absolute;
+    top: 26%;
+    transform: translateX(-50%) translateY(50%);
+}
+
+.sub-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-light);
+    left: 50.5%;
+    margin: 0;
+    position: absolute;
+    top: 54%;
+    transform: translateX(-50%) translateY(50%);
+}
+
+.mars-weather {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1em;
+    max-width: 400px;
+    margin: 0 20em 20em 0;
+
+    
+}
+
+
+
+
