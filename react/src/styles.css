@@ -16,8 +16,7 @@
   --clr-light: #fff;
   --clr-gray: #989898;
   --clr-dark: #444;
-  --clr-accent: #D06D6D;
-  --clr-accent-dark: #613131; 
+  --clr-accent: #a94e37;
 }
 
 body {
@@ -34,11 +33,23 @@ body {
 .App-logo {
     align-items: center;
     justify-content: center;
-    left: 35%;
     margin: 0;
     padding: 0;
     position: absolute;
-    top: 20%;
+    top: calc(50% - 350px);
+    left: calc(50% - 350px);
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    box-shadow:
+      inset 0 0 50px #fff,
+      inset 20px 0 80px #cb6613,
+      inset -20px 0 80px #721c02,
+      inset 20px 0 300px #721c02,
+      inset -20px 0 300px #721c02,
+      0 0 50px #e55c07,
+      -10px 0 80px #721c02,
+      10px 0 80px #fff;
 }
 
 .title-mars{
@@ -81,7 +92,7 @@ a {
 }
 
 a:hover {
-    color: var(--clr-accent-dark);
+    color: var(--clr-accent);
 }
 
 .section-title {
@@ -102,7 +113,7 @@ a:hover {
     font-size: var(--fs-h3);
     margin: 0;
     margin-left: 2em;
-    color: var(--clr-accent-dark);
+    color: var(--clr-accent);
 }
 
 .temp {
@@ -111,7 +122,7 @@ a:hover {
 }
 
 .reading {
-    color: var(--clr-accent-dark);
+    color: var(--clr-accent);
     margin: 0;
     margin-left: 2em;
     font-size: var(--fs-h2);
