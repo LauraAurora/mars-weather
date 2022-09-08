@@ -16,11 +16,11 @@ type MongoDb struct {
 	Client *mongo.Client
 }
 
-//new connection
+// Establish Connection to Database
 func Connection() *MongoDb {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
 	clientOptions := options.Client().
-		ApplyURI("mongodb+srv://admin:***@domsdb.agpuaxn.mongodb.net/?retryWrites=true&w=majority").
+		ApplyURI("mongodb+srv://admin:DOM123@domsdb.agpuaxn.mongodb.net/?retryWrites=true&w=majority").
 		SetServerAPIOptions(serverAPIOptions)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -70,7 +70,7 @@ func (connection *MongoDb) RetreiveData() nasa_api.Soles {
 		panic(err)
 	}
 
-	fmt.Println("Obtained data")
+	fmt.Println("Obtained Data...")
 
 	for cursor.Next(context.TODO()) { //loop through all document
 		var result nasa_api.Soles
