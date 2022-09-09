@@ -1,8 +1,23 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import logo from './mars.gif';
 import './styles.css';
-
+ 
 function App() {
+
+  const API = 'https://curiosity-rems-api.herokuapp.com/currentdata'
+  const [sol, setSol] = useState([]);
+
+  useEffect(() => {
+    axios.get(API)
+      .then(response => {
+          console.log(response)
+          setSol(response.data)
+        })
+  }, [API])
+
   return (
+    <>
     <div className='mars'>
           <img src={logo} className='App-logo' alt="mars" 
               height={700}
@@ -13,21 +28,21 @@ function App() {
       
     <div className='mars-weather'>
       <div className='date'>
-        <h2 className='section-title section-title-date'>Sol
-            <span data-current-sol> 375</span>
+        <h2 className='section-title section-title-date'>Sol 
+        <span data-current-sol> {sol.sol}</span>
         </h2>
-        <p className='date-day'>September 31</p>
+        <p className='date-day'>{sol.terrestrialDate}</p>
       </div>
 
       <div className='temp'>
         <h2 className='section-title'>Temperature</h2>
-        <p className='reading'>High: -20°C</p>
-        <p className='reading'>Low: -20°C</p>
+        <p className='reading'>High: {sol.max_temp}°C</p>
+        <p className='reading'>Low: {sol.min_temp}C</p>
       </div>
 
       <div className='pressure'>
         <h2 className='section-title'>Pressure</h2>
-        <p className='reading'>836 Pa -  <span data-pressure> [Higher] </span></p>
+        <p className='reading'>{sol.pressure} Pa -  <span data-pressure> [{sol.pressure_string}] </span></p>
       </div>
 
       <div className='info'>
@@ -41,6 +56,7 @@ function App() {
       </div>
     </div>
     </div> 
+    </>
   );
 }
 
