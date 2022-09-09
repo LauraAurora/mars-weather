@@ -3,15 +3,12 @@ package api
 import (
 	"MarsWeatherApp/database"
 	"encoding/json"
-	"fmt"
-	"log"
-	"os"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func StartAPI() {
-	port := os.Getenv("PORT")
+
 	client := database.Connection() // Fetch database connection/client
 	app := fiber.New()              // Creates fiber instance for api
 	// GET /api/register
@@ -30,6 +27,6 @@ func StartAPI() {
 	// 	return c.SendString("Request Successfully Posted")
 	// })
 
-	log.Fatal(app.Listen(fmt.Sprintf(":%s", port)))
+	app.Listen(":8084")
 	// port number for api
 }
