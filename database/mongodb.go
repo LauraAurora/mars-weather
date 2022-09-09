@@ -20,7 +20,7 @@ type MongoDb struct {
 func Connection() *MongoDb {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
 	clientOptions := options.Client().
-		ApplyURI("mongodb+srv://admin:***@domsdb.agpuaxn.mongodb.net/?retryWrites=true&w=majority").
+		ApplyURI("mongodb+srv://admin:DOM123@domsdb.agpuaxn.mongodb.net/?retryWrites=true&w=majority").
 		SetServerAPIOptions(serverAPIOptions)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
