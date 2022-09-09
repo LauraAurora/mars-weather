@@ -1,16 +1,16 @@
 package database
 
 import (
+	"MarsWeatherApp/nasa_api"
 	"context"
 	"fmt"
 	"log"
 	"time"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"MarsWeatherApp/nasa_api"
 )
-
 
 type MongoDb struct {
 	Client *mongo.Client
@@ -36,15 +36,15 @@ func Connection() *MongoDb {
 }
 
 func (connection *MongoDb) SendData(info nasa_api.Soles) {
-	
+
 	db := connection.Client.Database("Mars_Application")
 	coll := db.Collection("Data")
 
-	docs := bson.M{"_id": info.Id, "Terrestrial_date": info.Terrestrial_date, "Sol": info.Sol, "Season": info.Season, 
-					"Min_temp": info.Min_temp, "Max_temp": info.Max_temp,"Pressure": info.Pressure, 
-					"Pressure_string": info.Pressure_string, "Atmo_opacity": info.Atmo_opacity, "Sunrise": info.Sunrise,
-					"Sunset": info.Sunset, "Local_uv_irradiance_index": info.Local_uv_irradiance_index, "Min_gts_temp": info.Min_gts_temp, 
-					"Max_gts_temp": info.Max_gts_temp}
+	docs := bson.M{"_id": info.Id, "Terrestrial_date": info.Terrestrial_date, "Sol": info.Sol, "Season": info.Season,
+		"Min_temp": info.Min_temp, "Max_temp": info.Max_temp, "Pressure": info.Pressure,
+		"Pressure_string": info.Pressure_string, "Atmo_opacity": info.Atmo_opacity, "Sunrise": info.Sunrise,
+		"Sunset": info.Sunset, "Local_uv_irradiance_index": info.Local_uv_irradiance_index, "Min_gts_temp": info.Min_gts_temp,
+		"Max_gts_temp": info.Max_gts_temp}
 
 	result, err := coll.InsertOne(context.TODO(), docs)
 	if err != nil {
@@ -55,13 +55,13 @@ func (connection *MongoDb) SendData(info nasa_api.Soles) {
 
 func (connection *MongoDb) RetreiveData() nasa_api.Soles {
 	var info nasa_api.Soles
-	currentTime :=  time.Now().Add(-120*time.Hour).Format("01-02-2006")
+	currentTime := time.Now().Add(-130 * time.Hour).Format("01-02-2006")
 	db := connection.Client.Database("Mars_Application") //Set Database
-	coll := db.Collection("Data")                           //Set Collection
+	coll := db.Collection("Data")                        //Set Collection
 	// ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
 	fmt.Println("Retreiving information...")
-	
+
 	filter := bson.M{"Terrestrial_date": currentTime} //Set Filter
 
 	cursor, err := coll.Find(context.TODO(), filter)
