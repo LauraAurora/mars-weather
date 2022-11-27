@@ -17,10 +17,11 @@ type MongoDb struct {
 }
 
 // Establish Connection to Database
+
 func Connection() *MongoDb {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
 	clientOptions := options.Client().
-		ApplyURI("mongodb+srv://admin:***@domsdb.agpuaxn.mongodb.net/?retryWrites=true&w=majority").
+		ApplyURI("mongodb+srv://admin:DOM123@domsdb.agpuaxn.mongodb.net/?retryWrites=true&w=majority").
 		SetServerAPIOptions(serverAPIOptions)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -40,7 +41,7 @@ func (connection *MongoDb) SendData(info nasa_api.Soles) {
 	db := connection.Client.Database("Mars_Application")
 	coll := db.Collection("Data")
 
-	docs := bson.M{"_id": info.Id, "Terrestrial_date": info.Terrestrial_date, "Sol": info.Sol, "Season": info.Season,
+	docs := bson.M{"Terrestrial_date": info.Terrestrial_date, "Sol": info.Sol, "Season": info.Season,
 		"Min_temp": info.Min_temp, "Max_temp": info.Max_temp, "Pressure": info.Pressure,
 		"Pressure_string": info.Pressure_string, "Atmo_opacity": info.Atmo_opacity, "Sunrise": info.Sunrise,
 		"Sunset": info.Sunset, "Local_uv_irradiance_index": info.Local_uv_irradiance_index, "Min_gts_temp": info.Min_gts_temp,
@@ -100,4 +101,52 @@ func (connection *MongoDb) RetreiveData() nasa_api.Soles {
 	fmt.Println("Successfully Retrieved")
 	return info
 
+}
+
+func (connection *MongoDb) CheckData() string {
+	currentTime := time.Now().Add(-130 * time.Hour).Format("01-02-2006")
+	db := connection.Client.Database("Mars_Application") //Set Database
+	coll := db.Collection("Data")                        //Set Collection
+	// ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	times := ""
+
+	fmt.Println("\nRetreiving information... \n")
+
+	filter := bson.M{"Terrestrial_date": currentTime} //Set Filter
+
+	i, err := coll.Find(context.TODO(), filter)
+	if err != nil {
+		return "Found"
+	}
+
+	sole := nasa_api.Soles{}
+	for i.Next(context.TODO()) {
+		if err := i.Decode(&sole); err != nil {
+			panic(err)
+		}
+		times = sole.Terrestrial_date
+	}
+	fmt.Println("Successfully Retrieved")
+	print(times)
+	if times == "" {
+		return "Not Found"
+	} else {
+		return "Found"
+	}
+
+}
+
+func (connection *MongoDb) StartDataScrape() {
+	for {
+		if connection.CheckData() == "Not Found" {
+			data := nasa_api.GetData()
+			connection.SendData(data)
+			fmt.Println("Data Sent")
+		}
+		if connection.CheckData() == "Found" {
+			fmt.Println(" -----> Data Already Exists, Continuing...")
+		}
+
+		time.Sleep(1800 * time.Second)
+	}
 }

@@ -28,7 +28,7 @@ type Soles struct {
 
 func GetData() Soles {
 	var result Soles
-	currentTime := time.Now().Add(-120*time.Hour)
+	currentTime := time.Now().Add(-120 * time.Hour)
 	url := "https://cab.inta-csic.es/rems/wp-content/plugins/marsweather-widget/api.php?"
 	method := "GET"
 
@@ -53,15 +53,16 @@ func GetData() Soles {
 		fmt.Println(err)
 		return result
 	}
-	
+
 	parsed := string(body)
 	substring := parsed[12820:13195]
 	r := regexp.MustCompile(`\{[^}]*\}`)
+
 	matches := r.FindAllStringSubmatch(substring, -1)
 	substring = matches[0][0]
 
 	json.Unmarshal([]byte(substring), &result)
 	result.Terrestrial_date = currentTime.Format("01-02-2006")
-	//fmt.Println(result)
+
 	return result
 }
