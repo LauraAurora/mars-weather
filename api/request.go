@@ -3,30 +3,20 @@ package api
 import (
 	"MarsWeatherApp/database"
 	"encoding/json"
-
 	"github.com/gofiber/fiber/v2"
 )
 
 func StartAPI() {
+	app := fiber.New()                   // Creates fiber instance for api
+	app.Get("/currentdata", currentData) // Endpoint and function to call
+	app.Listen(":8084")                  // port number for api
+}
 
+func currentData(c *fiber.Ctx) error {
 	client := database.Connection() // Fetch database connection/client
-	app := fiber.New()              // Creates fiber instance for api
-	// GET /api/register
+	msg := client.RetreiveData()    // Retrieve data from database using mongoDB drivers
+	//result := make(map[string][]nasa_api.Soles)
 
-	app.Get("/currentdata", func(c *fiber.Ctx) error { // Endpoint for most recent information in database
-		msg := client.RetreiveData() // Retrieve data from database using mongoDB drivers
-		//result := make(map[string][]nasa_api.Soles)
-		// result["data"] = msg
-		newData, _ := (json.Marshal(msg))    // method for converting a go struct into json
-		return c.SendString(string(newData)) // Sends json object
-	})
-
-	// app.Post("/todos", func(c *fiber.Ctx) error {
-	// 	date := c.Query("")
-	// 	client.SendData(date)
-	// 	return c.SendString("Request Successfully Posted")
-	// })
-
-	app.Listen(":8084")
-	// port number for api
+	newData, _ := (json.Marshal(msg))    // method for converting a go struct into json
+	return c.SendString(string(newData)) // Sends json object
 }

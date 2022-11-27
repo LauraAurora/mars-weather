@@ -1,9 +1,12 @@
 package main
 
-import (
-	"MarsWeatherApp/api"
-)
+import "MarsWeatherApp/api"
 
 func main() {
-	api.StartAPI()
+
+	api.StartAPI() // Starts api
+
+	//client := database.Connection()     //Server Sided Data Scrape
+	//client.StartDataScrape()
+
 }
